@@ -45,14 +45,11 @@ fn count_tree_hits(base_map: &str, right: usize, down: usize) -> usize {
 
     let mut column_index = 0;
     for row in map.iter().filter(|r| !r.is_empty()).step_by(down) {
+        column_index %= row.len();
         match row.get(column_index) {
             Some(tile) => { if *tile == MapItem::Tree { tree_counter += 1; } }
             None => {
-                column_index %= row.len();
-                match row.get(column_index) {
-                    Some(tile) => { if *tile == MapItem::Tree { tree_counter += 1; } }
-                    None => panic!("something went horribly wrong")
-                }
+                panic!("something went horribly wrong")
             }
         }
         column_index += right;
