@@ -1,12 +1,10 @@
-use get_input::get_raw_input;
-
 use crate::parser::PasswordPolicy;
 
 mod parser;
 mod validator;
 
 fn main() {
-    let input = get_raw_input(2, 1);
+    let input = get_input::get_raw_input(2);
     let policies: Vec<PasswordPolicy> = input.lines()
         .map(parser::parse_pw_unwrap).collect();
     let valid_pws = policies.iter()

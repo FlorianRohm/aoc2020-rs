@@ -1,17 +1,13 @@
 use nom::{
-    bytes::complete::{tag, take_while_m_n},
+    bytes::complete::tag,
     combinator::map_res,
     IResult,
     sequence::tuple,
 };
 use nom::bytes::complete::take_while;
 use nom::character::{is_digit, is_space};
-use nom::character::complete::{anychar, char, one_of};
-use nom::combinator::recognize;
-use nom::error::{Error, ParseError};
-use nom::lib::std::str::FromStr;
-use nom::multi::{many0, many1};
-use nom::sequence::terminated;
+use nom::character::complete::anychar;
+use nom::error::ParseError;
 
 #[derive(Debug, PartialEq)]
 pub struct PasswordPolicy<'a> {
@@ -27,8 +23,7 @@ fn space<'a, E: ParseError<&'a str>>(i: &'a str) -> IResult<&'a str, &'a str, E>
 
 
 fn parse_password(input: &str) -> IResult<&str, PasswordPolicy> {
-    use nom::character::{is_space, is_alphanumeric};
-    use nom::number::complete::u8;
+    use nom::character::is_alphanumeric;
     use std::str::FromStr;
 
     let (input, min) = map_res(take_while(|a| is_digit(a as u8)), usize::from_str)(input)?;

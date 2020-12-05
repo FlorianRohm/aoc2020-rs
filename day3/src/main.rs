@@ -1,9 +1,7 @@
 use std::convert::TryFrom;
 
-use get_input::get_raw_input;
-
 fn main() {
-    let input = get_raw_input(3, 1);
+    let input = get_input::get_raw_input(3);
 
     let tree_hits_3_1 = count_tree_hits(&input, 3, 1);
     println!("{} trees are going to be hit", tree_hits_3_1);

@@ -1,6 +1,6 @@
 use regex::Regex;
 
-lazy_static! {
+lazy_static::lazy_static! {
     static ref EYE_MATCH: Regex = Regex::new("^#[0-9a-f]{6}$").unwrap();
     static ref PID_MATCH: Regex = Regex::new("^\\d{9}$").unwrap();
 }
