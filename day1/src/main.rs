@@ -1,6 +1,6 @@
 
 fn main() {
-    let input = get_input::get_raw_input(1);
+    let input = include_str!("./input");
     let lines: Vec<i32> = input.lines()
         .map(|line| line.parse::<i32>().expect("input should be ints"))
         .collect();

@@ -1,7 +1,7 @@
 mod lib;
 
 fn main() {
-    let input = get_input::get_raw_input(4);
+    let input = include_str!("./input");
 
     let valid_passports = lib::get_lenient_valid_pws_from_input(&input);
     println!("There are {} valid passports", valid_passports.count());

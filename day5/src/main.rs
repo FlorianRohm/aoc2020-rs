@@ -1,7 +1,7 @@
 use itertools::Itertools;
 
 fn main() {
-    let input = get_input::get_raw_input(5);
+    let input = include_str!("./input");
 
     let mut seat_ids: Vec<usize> = input.lines().filter(|line| line.len() == 10)
         .map(parse_seat)

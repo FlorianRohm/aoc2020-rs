@@ -1,7 +1,7 @@
 use std::convert::TryFrom;
 
 fn main() {
-    let input = get_input::get_raw_input(3);
+    let input = include_str!("./input");
 
     let tree_hits_3_1 = count_tree_hits(&input, 3, 1);
     println!("{} trees are going to be hit", tree_hits_3_1);

@@ -4,7 +4,7 @@ mod parser;
 mod validator;
 
 fn main() {
-    let input = get_input::get_raw_input(2);
+    let input = include_str!("./input");
     let policies: Vec<PasswordPolicy> = input.lines()
         .map(parser::parse_pw_unwrap).collect();
     let valid_pws = policies.iter()
