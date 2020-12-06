@@ -9,11 +9,11 @@ fn main() {
     println!("The REAL sum of customs to declare is {}", puzzle_answer_2);
 }
 
-pub fn count_answers(input: &str, create_set: fn(&str) -> HashSet<char>) -> usize {
+pub fn count_answers(input: &str, create_set: impl Fn(&str) -> HashSet<char>) -> usize {
     create_sets_from_all_groups(input, create_set).map(|hashset| hashset.len()).sum()
 }
 
-fn create_sets_from_all_groups(input: &str, create_set: fn(&str) -> HashSet<char>) -> impl Iterator<Item=HashSet<char>> + '_ {
+fn create_sets_from_all_groups<'a>(input: &'a str, create_set: impl Fn(&'a str) -> HashSet<char> + 'a) -> impl Iterator<Item=HashSet<char>> + 'a {
     input.split("\n\n").map(create_set)
 }
 
