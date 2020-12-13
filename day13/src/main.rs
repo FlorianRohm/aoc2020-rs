@@ -1,3 +1,5 @@
+use std::time::Instant;
+
 fn main() {
     let input: Vec<&str> = include_str!("./input").lines().collect();
     let arrival: CalculationType = input[0].parse().expect("not a number");
@@ -10,7 +12,9 @@ fn main() {
 
     println!("We're taking bus line {} and have to wait {}. Solution: {}", bus, wait, bus * wait);
 
+    let now = Instant::now();
     println!("remainder theorem: {}", solve_remainder_theorem(&lines));
+    println!("{}", now.elapsed().as_micros());
 }
 
 type CalculationType = i64;
