@@ -5,18 +5,19 @@ use crate::definitions::{BitmaskData, Input, MemoryData};
 mod parse;
 mod definitions;
 
-fn main() {
+pub fn solve() -> (i64, i64) {
     let input = include_str!("./input");
     let state = solve_v1(input);
 
-    let sum: i64 = state.data.values().sum();
+    let sum_1: i64 = state.data.values().sum();
 
-    println!("the sum of all instructions v1 is {}", sum);
+    println!("the sum of all instructions v1 is {}", sum_1);
     let state = solve_v2(input);
 
-    let sum: i64 = state.data.values().sum();
+    let sum_2: i64 = state.data.values().sum();
 
-    println!("the sum of all instructions v2 is {}", sum);
+    println!("the sum of all instructions v2 is {}", sum_2);
+    (sum_1, sum_2)
 }
 
 fn solve_v1(input: &str) -> State {
@@ -139,13 +140,18 @@ mod tests {
     use super::*;
 
     #[test]
+    fn should_solve() {
+        assert_eq!(solve(), (15403588588538, 3260587250457));
+    }
+
+    #[test]
     fn should_solve_test() {
         let input = "mask = XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X
 mem[8] = 11
 mem[7] = 101
 mem[8] = 0";
 
-        let state = dbg!(solve_v1(input));
+        let state = solve_v1(input);
 
         let mut solution = HashMap::new();
         solution.insert(7i64, 101i64);
@@ -161,7 +167,7 @@ mem[42] = 100
 mask = 00000000000000000000000000000000X0XX
 mem[26] = 1";
 
-        let state = dbg!(solve_v2(input));
+        let state = solve_v2(input);
 
         let values_sum: i64 = state.data.values().into_iter().sum();
 

@@ -1,13 +1,13 @@
 use itertools::Itertools;
 
-fn main() {
+pub fn solve() -> (usize, usize) {
     let input = include_str!("./input");
 
     let mut seat_ids: Vec<usize> = input.lines().filter(|line| line.len() == 10)
         .map(parse_seat)
         .map(|seat| seat.get_seat_id()).collect();
 
-    let maximum_id = seat_ids.iter()
+    let maximum_id = *seat_ids.iter()
         .max().unwrap_or(&0);
 
     println!("The biggest id is {}", maximum_id);
@@ -19,6 +19,7 @@ fn main() {
         .expect("No fitting seat found");
 
     println!("Our Seat id is {}", our_seat);
+    (maximum_id, our_seat)
 }
 
 
@@ -50,6 +51,11 @@ fn parse_seat(input: &str) -> Seat {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn should_solve() {
+        assert_eq!(solve(), (944, 554));
+    }
 
     #[test]
     fn should_translate_test_input_1() {

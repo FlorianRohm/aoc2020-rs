@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-fn main() {
+pub fn solve() -> (usize, i64) {
     let input = include_str!("./input");
     let input: Vec<i64> = input.lines().filter(|line| !line.is_empty()).map(|l| l.parse::<i64>().unwrap()).collect();
     let differences = get_differences(input);
@@ -11,6 +11,8 @@ fn main() {
 
     let count = count_combinations(&differences);
     println!("there are {} possibilities", count);
+
+    (joltage, count)
 }
 
 fn solve_joltage(input: &Vec<i64>) -> usize {
@@ -64,6 +66,11 @@ fn count_combinations_three_free(differences: &[i64]) -> i64 {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn should_solve() {
+        assert_eq!(solve(), (1984, 3543369523456));
+    }
 
     #[test]
     fn should_count_first() {

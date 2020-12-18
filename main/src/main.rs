@@ -15,9 +15,37 @@ fn main() {
     println!("With the anticipated slope of 3 right, one down we would hit {} trees.", tree_hits_3_1);
     println!("Examining the possible slopes, we calculate our tree hit score of {}", tree_hit_score);
 
-
     println!("\n==== day 4: Passport chaos at the airport ====");
     let (valid_passports, strict_valid_passports) = day4::solve();
     println!("Examining the passports around us, we find {} passports with the correct fields.", valid_passports);
     println!("Validating the passports though, we discover only {} passports are valid.", strict_valid_passports);
+
+    println!("\n==== day 5: todo ====");
+    let (a, b) = day5::solve();
+    println!("\n==== day 6: todo ====");
+    let (a, b) = day6::solve();
+    println!("\n==== day 7: todo ====");
+    let (a, b) = day7::solve();
+    println!("\n==== day 8: todo ====");
+    let (a, b) = day8::solve();
+    println!("\n==== day 9: todo ====");
+    let (a, b) = day9::solve();
+    println!("\n==== day 10: todo ====");
+    let (a, b) = day10::solve();
+    println!("\n==== day 11: todo ====");
+    let (a, b) = day11::solve();
+    println!("\n==== day 12: todo ====");
+    let (a, b) = day12::solve();
+    println!("\n==== day 13: todo ====");
+    let (a, b) = day13::solve();
+    println!("\n==== day 14: todo ====");
+    let (a, b) = day14::solve();
+    println!("\n==== day 15: todo ====");
+    let (a, b) = day15::solve();
+    println!("\n==== day 16: todo ====");
+    let (a, b) = day16::solve();
+    println!("\n==== day 17: todo ====");
+    let (a, b) = day17::solve();
+    println!("\n==== day 18: todo ====");
+    let (a, b) = day18::solve();
 }

@@ -1,6 +1,6 @@
 use std::time::Instant;
 
-fn main() {
+pub fn solve() -> ((i64, i64, i64), i64) {
     let input: Vec<&str> = include_str!("./input").lines().collect();
     let arrival: CalculationType = input[0].parse().expect("not a number");
     let lines: Vec<(BusIndex, BusId)> = input[1].split(",").enumerate()
@@ -10,11 +10,15 @@ fn main() {
 
     let (bus, wait) = get_line_and_departure(arrival, &*lines);
 
-    println!("We're taking bus line {} and have to wait {}. Solution: {}", bus, wait, bus * wait);
+    let solution = bus * wait;
+    println!("We're taking bus line {} and have to wait {}. Solution: {}", bus, wait, solution);
 
     let now = Instant::now();
-    println!("remainder theorem: {}", solve_remainder_theorem(&lines));
+    let remainder_solution = solve_remainder_theorem(&lines);
+    println!("remainder theorem: {}", remainder_solution);
     println!("{}", now.elapsed().as_micros());
+
+    ((bus, wait, solution), remainder_solution)
 }
 
 type CalculationType = i64;
@@ -56,6 +60,11 @@ fn solve_remainder_theorem(lines: &[(BusIndex, BusId)]) -> CalculationType {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn should_solve() {
+        assert_eq!(solve(), ((37, 8, 296), 535296695251210));
+    }
 
     #[test]
     fn should_solve_part1() {

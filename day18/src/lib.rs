@@ -7,21 +7,28 @@ use parser::AocParser;
 mod calculator;
 mod parser;
 
-fn main() {
+pub fn solve() -> (i64, i64) {
     let input = include_str!("./input");
     let all_evaluations: i64 = input.lines().map(|line| parser::PREC_CLIMBER_PART_1.parse(line)).map(|argument| argument.eval()).sum();
 
     println!("All things evaluated are {}", all_evaluations);
 
-    let all_evaluations: i64 = input.lines().map(|line| parser::PREC_CLIMBER_PART_2.parse(line)).map(|argument| argument.eval()).sum();
+    let all_evaluations_right_arithm: i64 = input.lines().map(|line| parser::PREC_CLIMBER_PART_2.parse(line)).map(|argument| argument.eval()).sum();
 
-    println!("All things evaluated with the right arithmetic are {}", all_evaluations);
+    println!("All things evaluated with the right arithmetic are {}", all_evaluations_right_arithm);
+
+    (all_evaluations, all_evaluations_right_arithm)
 }
 
 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn should_solve() {
+        assert_eq!(solve(), (3348222486398, 43423343619505));
+    }
 
     #[test]
     fn should_calculate_part1() {

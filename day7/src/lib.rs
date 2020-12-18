@@ -6,14 +6,15 @@ use crate::parser::Bag;
 
 mod parser;
 
-fn main() {
+pub fn solve() -> (usize, i32) {
     let input = include_str!("./input");
 
-    let i = get_number_of_possibilities_for(input, Bag::new("shiny".to_owned(), "gold".to_owned()));
-    println!("There are {} possibilities to pack the luggage", i);
+    let luggage = get_number_of_possibilities_for(input, Bag::new("shiny".to_owned(), "gold".to_owned()));
+    println!("There are {} possibilities to pack the luggage", luggage);
 
-    let i = get_number_of_bags_for(input, Bag::new("shiny".to_owned(), "gold".to_owned()));
-    println!("There are {} bags needed", i);
+    let bags = get_number_of_bags_for(input, Bag::new("shiny".to_owned(), "gold".to_owned()));
+    println!("There are {} bags needed", bags);
+    (luggage, bags)
 }
 
 fn get_number_of_possibilities_for(input: &str, bag: Bag) -> usize {
@@ -92,6 +93,11 @@ fn parse_rules(input: &str) -> Vec<(Bag, Vec<(i32, Bag)>)> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn should_solve() {
+        assert_eq!(solve(), (226, 9569));
+    }
 
     const INPUT: &str = "light red bags contain 1 bright white bag, 2 muted yellow bags.
 dark orange bags contain 3 bright white bags, 4 muted yellow bags.

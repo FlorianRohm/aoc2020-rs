@@ -1,12 +1,14 @@
 use std::collections::HashSet;
 
-fn main() {
+pub fn solve() -> (usize, usize) {
     let input = include_str!("./input");
     let puzzle_answer_1 = count_answers(input, crate_set_from_single_group_any);
     println!("The sum of customs to declare is {}", puzzle_answer_1);
 
     let puzzle_answer_2 = count_answers(input, crate_set_from_single_group_all);
     println!("The REAL sum of customs to declare is {}", puzzle_answer_2);
+
+    (puzzle_answer_1, puzzle_answer_2)
 }
 
 pub fn count_answers(input: &str, create_set: impl Fn(&str) -> HashSet<char>) -> usize {
@@ -34,6 +36,11 @@ fn crate_set_from_single_group_all(input: &str) -> HashSet<char> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn should_solve() {
+        assert_eq!(solve(), (6583, 3290));
+    }
 
     const INPUT: &str = "abc
 

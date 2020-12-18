@@ -4,19 +4,23 @@ mod logic_old;
 mod logic_real;
 mod structs;
 
-fn main() {
+pub fn solve() -> (i64, i64) {
     let input = include_str!("./input");
     let instructions: Vec<Instruction> = input.lines().filter(|line| !line.is_empty()).map(parse_line).collect();
 
     let state = logic_old::ShipState::new().execute_all_instructions(instructions);
 
-    println!("our ship is {} away from the start", state.get_distance());
+    let distance = state.get_distance();
+    println!("our ship is {} away from the start", distance);
 
     let instructions: Vec<Instruction> = input.lines().filter(|line| !line.is_empty()).map(parse_line).collect();
 
     let state = logic_real::ShipState::new().execute_all_instructions(instructions);
 
-    println!("our ship is really {} away from the start", state.get_distance());
+    let real_distance = state.get_distance();
+    println!("our ship is really {} away from the start", real_distance);
+
+    (distance, real_distance)
 }
 
 
@@ -35,5 +39,15 @@ fn parse_line(input: &str) -> structs::Instruction {
         "R" => Right(amount),
         "F" => Forward(amount),
         _ => panic!(format!("dir {} not supported", dir))
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn should_solve() {
+        assert_eq!(solve(), (1007, 41212));
     }
 }

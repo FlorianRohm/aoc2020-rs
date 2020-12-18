@@ -1,15 +1,18 @@
 use std::collections::HashMap;
 use std::time::Instant;
 
-fn main() {
+pub fn solve() -> (i32, i32) {
     let input = vec![7, 12, 1, 0, 16, 2];
 
-    println!("the last spoken number is {}", speak_n_times(input, 2020));
+    let spoken_2020 = speak_n_times(input, 2020);
+    println!("the last spoken number is {}", spoken_2020);
     let input = vec![7, 12, 1, 0, 16, 2];
 
     let now = Instant::now();
-    println!("the last spoken number is {}", speak_n_times(input, 30000000));
+    let spoken_3m = speak_n_times(input, 30000000);
+    println!("the last spoken number is {}", spoken_3m);
     println!("{}", now.elapsed().as_millis());
+    (spoken_2020, spoken_3m)
 }
 
 fn speak_n_times(input: Vec<i32>, n: usize) -> i32 {
@@ -78,6 +81,11 @@ impl Speaker {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn should_solve() {
+        assert_eq!(solve(), (410, 238));
+    }
 
     #[test]
     fn should_speak_next_number() {

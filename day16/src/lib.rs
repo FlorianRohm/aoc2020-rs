@@ -29,7 +29,7 @@ lazy_static::lazy_static! {
     static ref OUR_TICKET: Ticket = Ticket(vec![83,137,101,73,67,61,103,131,151,127,113,107,109,89,71,139,167,97,59,53]);
 }
 
-fn main() {
+pub fn solve() -> (i32, i64) {
     let input = include_str!("./input");
     let tickets: Vec<Ticket> = input.lines()
         .filter(|line| !line.is_empty())
@@ -47,11 +47,13 @@ fn main() {
 
     let solution: i64 = vec.iter()
         .filter(|(rule, _)| rule.0.contains("departure"))
-        .map(|(_, column)| dbg!(OUR_TICKET.0[*column]))
+        .map(|(_, column)| OUR_TICKET.0[*column])
         .map(|a| a as i64)
         .product();
 
     println!("Solution to this day is {}", solution);
+
+    (invalid_sum, solution)
 }
 
 fn get_invalid_fields(tickets: &[Ticket], rules: &[Rule]) -> Vec<i32> {
@@ -119,6 +121,11 @@ fn get_next_single_rule<'a>(input: &mut Vec<(&'a Rule, Vec<usize>)>) -> Option<(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn should_solve() {
+        assert_eq!(solve(), (19087, 1382443095281));
+    }
 
     #[test]
     fn should_compute_test() {
