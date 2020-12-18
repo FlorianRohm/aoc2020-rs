@@ -1,10 +1,9 @@
 use std::convert::TryFrom;
 
-fn main() {
+pub fn solve() -> (usize, usize) {
     let input = include_str!("./input");
 
     let tree_hits_3_1 = count_tree_hits(&input, 3, 1);
-    println!("{} trees are going to be hit", tree_hits_3_1);
 
 
     let tree_hits_1_1 = count_tree_hits(&input, 1, 1);
@@ -12,7 +11,9 @@ fn main() {
     let tree_hits_7_1 = count_tree_hits(&input, 7, 1);
     let tree_hits_1_2 = count_tree_hits(&input, 1, 2);
 
-    println!("Tree hit score: {}", tree_hits_1_1 * tree_hits_1_2 * tree_hits_3_1 * tree_hits_5_1 * tree_hits_7_1)
+    let tree_hit_score = tree_hits_1_1 * tree_hits_1_2 * tree_hits_3_1 * tree_hits_5_1 * tree_hits_7_1;
+
+    (tree_hits_3_1, tree_hit_score)
 }
 
 #[derive(Eq, PartialEq, Debug)]
@@ -58,7 +59,14 @@ fn count_tree_hits(base_map: &str, right: usize, down: usize) -> usize {
 
 #[cfg(test)]
 mod tests {
+    use std::intrinsics::size_of;
+
     use super::*;
+
+    #[test]
+    fn should_solve() {
+        assert_eq!(solve(), (244, 9406609920))
+    }
 
     const TEST_INPUT: &str = "
 ..##.......

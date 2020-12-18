@@ -3,7 +3,7 @@ use crate::parser::PasswordPolicy;
 mod parser;
 mod validator;
 
-fn main() {
+pub fn solve() -> (usize, usize) {
     let input = include_str!("./input");
     let policies: Vec<PasswordPolicy> = input.lines()
         .map(parser::parse_pw_unwrap).collect();
@@ -15,13 +15,17 @@ fn main() {
         .filter(|&pw| validator::is_valid_new(pw))
         .count();
 
-    println!("there are {} valid passwords", valid_pws);
-    println!("there are {} valid passwords new", valid_pws_new);
+    (valid_pws, valid_pws_new)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn should_solve() {
+        assert_eq!(solve(), (418, 616));
+    }
 
     #[test]
     fn check_provided() {
