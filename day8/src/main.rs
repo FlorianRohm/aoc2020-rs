@@ -8,7 +8,7 @@ mod permute;
 fn main() {
     let input = include_str!("./input");
     let input = parser::parse_program(input);
-    let (i, bool) = Assembly::new(&input).run();
+    let (i, _) = Assembly::new(&input).run();
 
     println!("The program starts to repeat itself with a value of {}", i);
 

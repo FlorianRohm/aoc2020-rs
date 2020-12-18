@@ -1,4 +1,4 @@
-use ndarray::{arr3, Array, Array3, s};
+use ndarray::{Array, Array3, s};
 
 use crate::cell::Cell;
 

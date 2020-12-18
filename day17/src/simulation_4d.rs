@@ -1,4 +1,4 @@
-use ndarray::{Array3, Array4, Zip};
+use ndarray::{Array4, Zip};
 use ndarray::prelude::s;
 
 use crate::cell::Cell;

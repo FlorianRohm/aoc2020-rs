@@ -1,7 +1,6 @@
 use std::fmt::{Debug, Formatter};
 
-use ndarray::{Array2, ArrayBase, ArrayView, ArrayView2, OwnedRepr, Zip};
-use ndarray::prelude::s;
+use ndarray::{Array2, ArrayView2, prelude::s, Zip};
 
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub enum Cell {
@@ -44,17 +43,10 @@ impl Simulation {
         let source = self.lattice.windows((3, 3));
         let mut target = self.tmp_lattice.slice_mut(inner_slice!(self));
         Zip::from(&mut target).and(source).apply(|tar, src| {
-            let occupations = src[[0, 0]].to_occupation_nr() +
-                src[[1, 0]].to_occupation_nr() +
-                src[[2, 0]].to_occupation_nr() +
-                src[[0, 1]].to_occupation_nr() +
-                src[[2, 1]].to_occupation_nr() +
-                src[[0, 2]].to_occupation_nr() +
-                src[[1, 2]].to_occupation_nr() +
-                src[[2, 2]].to_occupation_nr();
+            let occupations = src.iter().filter(|c| c != &&Cell::OCC).count();
 
             let new_cell = match (&src[[1, 1]], occupations) {
-                (Cell::OCC, o) if o >= 4 => Cell::FRE,
+                (Cell::OCC, o) if o >= 5 => Cell::FRE,
                 (Cell::FRE, o) if o == 0 => Cell::OCC,
                 (c, _) => c.clone()
             };

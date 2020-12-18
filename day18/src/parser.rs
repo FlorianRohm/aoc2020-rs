@@ -2,7 +2,6 @@ use pest::iterators::{Pair, Pairs};
 use pest::Parser;
 
 use crate::calculator::{Argument, Operand};
-use crate::calculator::Argument::Literal;
 
 #[derive(Parser)]
 #[grammar = "parser.pest"]
@@ -69,7 +68,7 @@ impl AocParser for pest::prec_climber::PrecClimber<Rule> {
     }
 
     fn parse(&self, input: &str) -> Argument {
-        let mut calculation = CalcParser::parse(Rule::Calculation, input).unwrap_or_else(|e| panic!("{}", e));
+        let calculation = CalcParser::parse(Rule::Calculation, input).unwrap_or_else(|e| panic!("{}", e));
 
         self.eval(calculation.into_iter().next().unwrap().into_inner())
     }
