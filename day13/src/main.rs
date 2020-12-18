@@ -27,29 +27,30 @@ fn get_line_and_departure(arrival: CalculationType, lines: &[(BusIndex, BusId)])
 
 /// to get the time of the first departure, we have to solve
 /// t = 0 mod 7
-/// t = 1 mod 13
-/// t = ai mod mi
+/// t = 13 - 1 mod 13
+/// t = mi - ai mod mi
 /// ...
 /// which is the chinese remainder theorem.
 /// Manual inspection of the input proves that all BusIds are prime.
 #[allow(non_snake_case)]
 fn solve_remainder_theorem(lines: &[(BusIndex, BusId)]) -> CalculationType {
-    let M: CalculationType = lines.iter().map(|&(_, id)| id).product();
+    let M: CalculationType = lines.iter().map(|&(_, mi)| mi).product();
 
     let one_solution: CalculationType = lines.iter().map(|&(ai, mi)| {
         use num_integer::ExtendedGcd;
         use num_integer::Integer;
 
         let Mi = M / mi;
+        debug_assert_eq!(Mi * mi, M);
 
         let ExtendedGcd { gcd: g, x: si, .. } = Mi.extended_gcd(&mi);
 
         let ei = si * Mi;
         debug_assert_eq!(g, 1);
-        ai * ei
+        (mi - ai) * ei
     }).sum();
 
-    one_solution.abs() % M
+    one_solution.rem_euclid(M)
 }
 
 #[cfg(test)]
