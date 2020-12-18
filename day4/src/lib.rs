@@ -129,9 +129,22 @@ pub fn get_strict_valid_pws_from_input(input: &str) -> impl Iterator<Item=Passpo
         .filter(Passport::is_strictly_valid)
 }
 
+pub fn solve() -> (usize, usize) {
+    let input = include_str!("./input");
+
+    let valid_passports = get_lenient_valid_pws_from_input(&input);
+    let strict_valid_passports = get_strict_valid_pws_from_input(&input);
+    (valid_passports.count(), strict_valid_passports.count())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn should_solve() {
+        assert_eq!(solve(), (264, 224))
+    }
 
     const INPUT: &str = "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
 byr:1937 iyr:2017 cid:147 hgt:183cm

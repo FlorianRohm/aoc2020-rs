@@ -14,4 +14,10 @@ fn main() {
     let (tree_hits_3_1, tree_hit_score) = day3::solve();
     println!("With the anticipated slope of 3 right, one down we would hit {} trees.", tree_hits_3_1);
     println!("Examining the possible slopes, we calculate our tree hit score of {}", tree_hit_score);
+
+
+    println!("\n==== day 4: Passport chaos at the airport ====");
+    let (valid_passports, strict_valid_passports) = day4::solve();
+    println!("Examining the passports around us, we find {} passports with the correct fields.", valid_passports);
+    println!("Validating the passports though, we discover only {} passports are valid.", strict_valid_passports);
 }
