@@ -1,7 +1,7 @@
 
 Calculation = { SOI ~ Expr }
 
-Operation = { Add |  Multiply  }
+Operation = _{ Add |  Multiply  }
     Add      = { "+" }
     Multiply = { "*" }
 
